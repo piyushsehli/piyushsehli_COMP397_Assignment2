@@ -24,6 +24,11 @@ var scenes;
                 this._meteors.push(new objects.Meteor());
             }
         };
+        Play.prototype._buildEnemy = function () {
+            for (var count = 0; count < this._enemyNum; count++) {
+                this._enemy.push(new objects.Enemy());
+            }
+        };
         Play.prototype._removeCurrentBullet = function (bullet) {
             var temp = bullet;
             this._bulletClicked = this._bulletClicked.filter(function (obj) { return obj !== bullet; });
@@ -39,8 +44,12 @@ var scenes;
             this._ufo = new objects.Ufo();
             // creates an empty array of type meteor
             this._meteors = new Array();
-            this._meteorNum = 3;
+            this._meteorNum = 2;
             this._buildMeteors();
+            // creates an empty array of type enemy
+            this._enemy = new Array();
+            this._enemyNum = 2;
+            this._buildEnemy();
             // bullet
             this._bulletClicked = new Array();
             this.Main();
@@ -57,24 +66,26 @@ var scenes;
                 }
                 else {
                     // check cololision between enemy and bullet
-                    //this._ufo.forEach(enemy => {
-                    _this._enemyCollision = managers.Collision.check(_this._ufo, bullet);
-                    if (_this._enemyCollision) {
-                        // reset and remove enemy
-                        _this._ufo.Reset();
-                        _this.removeChildAt(_this._ufo.y);
-                        //   reset and remove bullet
-                        _this._removeCurrentBullet(bullet);
-                        managers.Game.ScoreBoard.Score +=
-                            100;
-                    }
-                    //});
+                    _this._enemy.forEach(function (enemy) {
+                        _this._enemyCollision = managers.Collision.check(enemy, bullet);
+                        if (_this._enemyCollision) {
+                            // reset and remove enemy
+                            enemy.Reset();
+                            _this.removeChildAt(enemy.y);
+                            //   reset and remove bullet
+                            _this._removeCurrentBullet(bullet);
+                        }
+                    });
                 }
             });
             managers.Collision.check(this._plane, this._ufo);
             this._meteors.forEach(function (meteor) {
                 meteor.Update();
                 managers.Collision.check(_this._plane, meteor);
+            });
+            this._enemy.forEach(function (enemy) {
+                enemy.Update();
+                managers.Collision.check(_this._plane, enemy);
             });
         };
         Play.prototype.Reset = function () {
@@ -95,6 +106,10 @@ var scenes;
             for (var _i = 0, _a = this._meteors; _i < _a.length; _i++) {
                 var meteor = _a[_i];
                 this.addChild(meteor);
+            }
+            for (var _b = 0, _c = this._enemy; _b < _c.length; _b++) {
+                var enemy = _c[_b];
+                this.addChild(enemy);
             }
             // handaling click event for bullets
             this._background.on("click", function () {

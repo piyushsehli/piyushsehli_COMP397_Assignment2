@@ -17,6 +17,7 @@
         {id: "ufo", src:"/Assets/images/png/enemyUFO.png"},
         {id: "meteor", src:"/Assets/images/png/meteorBig.png"},
         {id: "bullet", src:"/Assets/images/png/laserRed.png"},
+        {id: "enemy", src:"/Assets/images/png/enemyShip.png"},
         {id: "yay", src:"/Assets/audio/yay.ogg"},
         {id: "thunder", src:"/Assets/audio/thunder.ogg"},
         {id: "engine", src:"/Assets/audio/engine.ogg"}

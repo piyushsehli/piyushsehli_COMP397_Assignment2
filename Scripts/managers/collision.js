@@ -23,8 +23,15 @@ var managers;
                             return 1;
                             break;
                         case "bullet":
+                            var thunderSound2 = createjs.Sound.play("thunder");
+                            thunderSound2.volume = 0.2;
+                            managers.Game.ScoreBoard.Score += 100;
+                            return 1;
+                            break;
+                        case "enemy":
                             var thunderSound3 = createjs.Sound.play("thunder");
                             thunderSound3.volume = 0.2;
+                            managers.Game.ScoreBoard.Lives -= 1;
                             return 1;
                             break;
                     }

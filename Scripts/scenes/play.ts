@@ -6,7 +6,9 @@ module scenes {
         private _ufo:objects.Ufo;
         private _bulletClicked: objects.Bullet[];
         private _meteors:objects.Meteor[];
+        private _enemy:objects.Enemy[];
         private _meteorNum:number;
+        private _enemyNum:number;
         private _enemyCollision:  number;
         public engineSound:createjs.AbstractSoundInstance;
 
@@ -21,6 +23,12 @@ module scenes {
         private _buildMeteors():void {
             for (let count = 0; count < this._meteorNum; count++) {
                 this._meteors.push(new objects.Meteor());
+            }
+        }
+
+        private _buildEnemy():void {
+            for (let count = 0; count < this._enemyNum; count++) {
+                this._enemy.push(new objects.Enemy());
             }
         }
 
@@ -43,10 +51,16 @@ module scenes {
 
             // creates an empty array of type meteor
             this._meteors = new Array<objects.Meteor>();
-            this._meteorNum = 3;
+            this._meteorNum = 2;
 
             this._buildMeteors();
             
+            // creates an empty array of type enemy
+            this._enemy = new Array<objects.Enemy>();
+            this._enemyNum = 2;
+
+            this._buildEnemy();
+
             // bullet
             this._bulletClicked = new Array<objects.Bullet>();
             
@@ -64,20 +78,18 @@ module scenes {
                   this._removeCurrentBullet(bullet);
                 } else {
                   // check cololision between enemy and bullet
-                  //this._ufo.forEach(enemy => {
-                    this._enemyCollision = managers.Collision.check(this._ufo, bullet);
+                  this._enemy.forEach(enemy => {
+                    this._enemyCollision = managers.Collision.check(enemy, bullet);
         
                     if (this._enemyCollision) {
                       // reset and remove enemy
-                      this._ufo.Reset();
-                      this.removeChildAt(this._ufo.y);
+                      enemy.Reset();
+                      this.removeChildAt(enemy.y);
         
                       //   reset and remove bullet
                       this._removeCurrentBullet(bullet);
-                      managers.Game.ScoreBoard.Score +=
-                        100;
                     }
-                  //});
+                  });
                 }
               });
         
@@ -87,6 +99,11 @@ module scenes {
             this._meteors.forEach(meteor => {
                 meteor.Update();
                 managers.Collision.check(this._plane, meteor);
+            });
+
+            this._enemy.forEach(enemy => {
+                enemy.Update();
+                managers.Collision.check(this._plane, enemy);
             });
             
         }
@@ -115,6 +132,10 @@ module scenes {
             // adding the cloud to the scene
             for (const meteor of this._meteors) {
                 this.addChild(meteor);
+            }
+
+            for (const enemy of this._enemy) {
+                this.addChild(enemy);
             }
 
             // handaling click event for bullets
