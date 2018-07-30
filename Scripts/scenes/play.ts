@@ -40,7 +40,7 @@ module scenes {
 
         // public methods
         public Start():void {
-            this.engineSound = createjs.Sound.play("engine");
+            this.engineSound = createjs.Sound.play("backgroundMusic");
             this.engineSound.loop = -1;
             this.engineSound.volume = 0.1;
 
@@ -149,6 +149,7 @@ module scenes {
           bullet.x = this._plane.x;
           this._bulletClicked.push(bullet);
           this.addChild(bullet);
+          
         },
         this
       );

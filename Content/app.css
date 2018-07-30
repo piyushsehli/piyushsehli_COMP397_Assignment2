@@ -6,4 +6,6 @@ body {
     border: 1px black dotted;
     background-color: white;
     border-radius: 1%;
+    display: block;
+    margin: auto;
 }

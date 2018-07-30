@@ -36,7 +36,7 @@ var scenes;
         };
         // public methods
         Play.prototype.Start = function () {
-            this.engineSound = createjs.Sound.play("engine");
+            this.engineSound = createjs.Sound.play("backgroundMusic");
             this.engineSound.loop = -1;
             this.engineSound.volume = 0.1;
             this._plane = new objects.Plane();

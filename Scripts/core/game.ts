@@ -18,9 +18,10 @@
         {id: "meteor", src:"/Assets/images/png/meteorBig.png"},
         {id: "bullet", src:"/Assets/images/png/laserRed.png"},
         {id: "enemy", src:"/Assets/images/png/enemyShip.png"},
-        {id: "yay", src:"/Assets/audio/yay.ogg"},
-        {id: "thunder", src:"/Assets/audio/thunder.ogg"},
-        {id: "engine", src:"/Assets/audio/engine.ogg"}
+        {id: "coin", src:"/Assets/audio/coin.wav"},
+        {id: "explosion", src:"/Assets/audio/explosion.mp3"},
+        {id: "backgroundMusic", src:"/Assets/audio/background.wav"},
+        {id: "bulletSound", src:"/Assets/audio/bullet.mp3"}
     ]
 
 
